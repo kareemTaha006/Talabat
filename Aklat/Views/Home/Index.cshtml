@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_HomeLayout";
+}
+@model List<Category>
+
+    <div id="container" >
+    <div id="slider-container" class="bg-gradient-dark">
+            <span onclick="slideRight()" class="btn"></span>
+        <div id="slider" >
+            @foreach (var category in Model)
+                {
+                    <div class="slide productContainer productrow d-flex align-items-center  rounded no-border
+                    justify-content-around flex-column text-black  "
+                    onclick="getProducts(@category.ID)"
+                    style="background-image:url('@Url.Content($"~/Img/{category.ImageUrl}")')">
+                    <span  class="catName fs-5 text-white">@category.Name</span>
+                    </div>
+                }
+            </div>
+            <span onclick="slideLeft()" class="btn"></span>
+        </div>
+    </div>
+
+
+<div id="products" class="p-4 d-flex justify-content-around align-items-start row g-2 " style="box-shadow: -10px -10px 20px 5px white inset;">
+    
+</div>
+<div id="orders" class="d-flex flex-column justify-content-between overflow-scroll ">
+    <table class="table table-striped table-dark m-0 ">
+        <thead class="thead-light" >
+            <tr>
+                <th scope="col">Product ID</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Product Quantity</th>
+                <th scope="col">Product Price</th>
+                <th scope="col">More</th>
+                <th scope="col">Less</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">ProducT Note</th>
+                <th scope="col">Delete</th>
+
+            </tr>
+        </thead>
+        <tbody id="orderRow">
+        </tbody>
+    </table>
+    <div class="p-5 d-flex flex-column justify-content-between align-items-center ">
+        <div class="w-100 d-flex flex-column justify-content-between align-items-center ">
+
+        <label for="note" class="text-light fs-4">Order Note</label>
+        <input type="text" value="" id="note" class="form-control my-2 w-75" ></input>
+        </div>
+        <button  class="mt-2 btn btn-outline-success w-50" onclick="createArrayOfObjects()">Click</button>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/assets/js/HomeScript.js"></script>
+    <script src="/assets/js/homeLocalValidation.js"></script>
+}
+
+
+
